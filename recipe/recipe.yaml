@@ -1,0 +1,43 @@
+context:
+  version: "0.8"
+
+package:
+  name: randonneur_data
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/r/randonneur_data/randonneur_data-${{ version }}.tar.gz
+  sha256: 33458191ad3f7ae6f1b45e68ff4b962288afc978273ab4a9894779dc0077398b
+
+build:
+  noarch: python
+  script: python -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools >=77.0
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+      imports:
+        - randonneur_data
+      pip_check: true
+
+about:
+  homepage: https://github.com/brightway-lca/randonneur_data
+  summary: 'Data for the randonneur ETL library and spec'
+  license: MIT
+  license_file: LICENSE
+  repository: https://github.com/brightway-lca/randonneur_data
+
+extra:
+  recipe-maintainers:
+    - m-rossi
